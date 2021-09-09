@@ -30,7 +30,15 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  if(movies.length === 0){
+    throw "The movies array is empty."
+  }
+  let newArr = movies.map((movie) => {
+    return movie.title;
+  })
+  return newArr;
+}
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +58,22 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+const checkIfAnyMovieHasRating = (movies, rated = "G")=> {
+  if(movies.length === 0 ){
+    throw "the movies array is empty."
+  }
+
+  rated = rated || "G";
+
+  let ratingsArr = movies.some((movie) => {
+    if(movie.rated === rated){
+      return true;
+    } else {
+      return false
+    }
+  })
+  return ratingsArr;
+}
 
 /**
  * findById()
@@ -68,7 +91,21 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+const findById = (movies, id)=> {
+  let result = {}
+  
+  if (!movies.length){
+    throw " there are no movies"
+  }
+  
+  let findArr = movies.find((movie) => {
+    if(movie.imdbID === id){
+      return movie.title
+    } 
+    
+  })
+  return findArr
+}
 
 /**
  * filterByGenre()
@@ -92,7 +129,18 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+if(movies.length === 0){
+  throw "there are no movies"
+}
+  let movieObj = movies.filter((movie ,genre = []) => { 
+    if(movie.genre.toLowerCase() === genre){
+      return movie.title
+    }
+    
+  })
+  return movieObj;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,7 +166,16 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  if(movies.length === 0){
+    throw "there are no movies"
+  }
+  let moviesArr = movies.filter((movie) =>{
+    let releasedDates = movie.released;
+    let movieYear = releasedDates.pop();
+    console.log(movieYear)
+  })
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
